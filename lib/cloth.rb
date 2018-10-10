@@ -10,7 +10,7 @@ class Cloth
     @status = false
   end
 
-  def for_weather?
+  def for_weather?(out_temp, wardrobe)
 
   end
 end
