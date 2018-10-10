@@ -1,12 +1,16 @@
 class Cloth
   attr_reader :item
 
-  def initialize(current_path)
+  def initialize(name, type, temperature)
+    @item = {}
+    @item[:name] = name
+    @item[:type] = type
+    @item[:temperature] = temperature
 
-    full_path = Dir.glob("#{current_path}/data/*.txt")
+    @status = false
+  end
 
-    full_path.each do |path|
-      @item = File.readlines(path, chomp: true)
-    end
+  def for_weather?
+
   end
 end
