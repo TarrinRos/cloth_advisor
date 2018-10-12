@@ -1,5 +1,5 @@
 require_relative 'lib/cloth'
-require_relative 'lib/wardrobe'
+require_relative 'lib/Wardrobe'
 
 current_path = File.dirname(__FILE__)
 
@@ -12,20 +12,14 @@ current_path = File.dirname(__FILE__)
 
 full_path = Dir.glob("#{current_path}/data/*.txt")
 
-wardrobe = Wardrobe.new
+wardrobe = Wardrobe.new(full_path)
 
-full_path.each do |path|
-  item = File.readlines(path, chomp: true)
-
-  cloth = Cloth.new(item[0], item[1], item[2])
-
-  wardrobe.add_cloth(cloth.item)
-end
+puts wardrobe.inspect
 
 puts 'Какая температура сейчас на улице?'
 
-puts 'Например:"-20" или "20"'
+puts 'Например: -20 или 20'
 
 out_temp = STDIN.gets.to_i
 
-cloth.for_weather?(out_temp, wardrobe)
+wardrobe.advise(out_temp)
