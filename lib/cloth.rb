@@ -12,10 +12,6 @@ class Cloth
   end
 
   def for_weather?(out_temp)
-    if out_temp.between?(@temper[0], @temper[1])
-      true
-    else
-      false
-    end
+    out_temp.between?(@temper[0], @temper[1])
   end
 end
