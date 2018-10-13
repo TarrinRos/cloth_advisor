@@ -8,7 +8,7 @@ class Cloth
     @type = item[1]
     @temper = item[2].delete("( )").split(",")
     # Переводит строковое содержимое массива в числовые значения
-    @temper.map! { |item| item.to_i}
+    @temper.map! { |item| item.to_i }
   end
 
   def for_weather?(out_temp)
@@ -16,6 +16,6 @@ class Cloth
   end
 
   def to_s
-    "#{@title}, #{@type}, (#{@temper[0]}..#{@temper[1]})"
+    "#{@type}: #{@title}, (#{@temper[0]}..#{@temper[1]})"
   end
 end

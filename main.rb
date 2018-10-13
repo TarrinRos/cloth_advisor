@@ -1,5 +1,5 @@
 require_relative 'lib/cloth'
-require_relative 'lib/Wardrobe'
+require_relative 'lib/smart_wardrobe'
 
 current_path = File.dirname(__FILE__)
 
@@ -12,9 +12,7 @@ current_path = File.dirname(__FILE__)
 
 full_path = Dir.glob("#{current_path}/data/*.txt")
 
-wardrobe = Wardrobe.new(full_path)
-
-puts wardrobe.inspect
+smart_wardrobe = SmartWardrobe.new(full_path)
 
 puts 'Какая температура сейчас на улице?'
 
@@ -26,14 +24,6 @@ puts 'В такую погоду я Вам советую надеть:'
 
 puts '===================================='
 
-puts wardrobe.types.inspect
+puts ''
 
-puts wardrobe.collect_for_weather(out_temp)
-
-# puts wardrobe.advise_head(out_temp)
-#
-# puts wardrobe.advise_body(out_temp)
-#
-# puts wardrobe.advise_legs(out_temp)
-#
-# puts wardrobe.advise_boots(out_temp)
+smart_wardrobe.advise(out_temp)
