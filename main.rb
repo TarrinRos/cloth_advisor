@@ -12,7 +12,7 @@ full_path = Dir.glob("#{current_path}/data/*.txt")
 
 smart_wardrobe = SmartWardrobe.new(full_path)
 
-puts 'Программа "Одевайтес по погоде" v 1.0.3'
+puts 'Программа "Одевайтесь по погоде" v 1.0.3'
 
 puts '========================================'
 
@@ -24,12 +24,18 @@ puts 'Например: -20 или 20'
 
 out_temp = STDIN.gets.to_i
 
-puts ''
+case(out_temp)
+when(-40..40)
+  puts ''
 
-puts 'В такую погоду я Вам советую надеть:'
+  puts 'В такую погоду я Вам советую надеть:'
 
-puts '===================================='
+  puts '===================================='
 
-puts ''
+  puts ''
 
-smart_wardrobe.advise(out_temp)
+  smart_wardrobe.advise(out_temp)
+else
+  puts 'Куда собрались в такую погоду? Сидите дома!'
+end
+
