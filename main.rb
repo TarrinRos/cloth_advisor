@@ -22,4 +22,4 @@ puts 'Например: -20 или 20'
 
 out_temp = STDIN.gets.to_i
 
-wardrobe.advise(out_temp)
+puts wardrobe.advise(out_temp)

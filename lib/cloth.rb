@@ -14,4 +14,8 @@ class Cloth
   def for_weather?(out_temp)
     out_temp.between?(@temper[0], @temper[1])
   end
+
+  def show_cloth
+    "#{@title}, #{@type}, \(#{@temper[0]}..#{@temper[1]}\)"
+  end
 end
