@@ -26,10 +26,14 @@ puts 'В такую погоду я Вам советую надеть:'
 
 puts '===================================='
 
-puts wardrobe.advise_head(out_temp)
+puts wardrobe.types.inspect
 
-puts wardrobe.advise_body(out_temp)
+puts wardrobe.collect_for_weather(out_temp)
 
-puts wardrobe.advise_legs(out_temp)
-
-puts wardrobe.advise_boots(out_temp)
+# puts wardrobe.advise_head(out_temp)
+#
+# puts wardrobe.advise_body(out_temp)
+#
+# puts wardrobe.advise_legs(out_temp)
+#
+# puts wardrobe.advise_boots(out_temp)
