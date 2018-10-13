@@ -15,7 +15,7 @@ class Cloth
     out_temp.between?(@temper[0], @temper[1])
   end
 
-  def show_cloth
-    "#{@title}, #{@type}, \(#{@temper[0]}..#{@temper[1]}\)"
+  def to_s
+    "#{@title}, #{@type}, (#{@temper[0]}..#{@temper[1]})"
   end
 end

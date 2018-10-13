@@ -22,4 +22,14 @@ puts 'Например: -20 или 20'
 
 out_temp = STDIN.gets.to_i
 
-puts wardrobe.advise(out_temp)
+puts 'В такую погоду я Вам советую надеть:'
+
+puts '===================================='
+
+puts wardrobe.advise_head(out_temp)
+
+puts wardrobe.advise_body(out_temp)
+
+puts wardrobe.advise_legs(out_temp)
+
+puts wardrobe.advise_boots(out_temp)

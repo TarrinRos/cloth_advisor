@@ -3,16 +3,25 @@ class Wardrobe
 
   def initialize(full_path)
     @wardrobe = full_path.map {|path| Cloth.new(path)}
-    @selected_cothes = {}
   end
 
-  def advise(out_temp)
-    selected_clothes = []
-    @wardrobe.map do |cloth|
-      if cloth.for_weather?(out_temp)
-        selected_clothes << cloth
-      end
-    end
-    selected_clothes.inspect
+  def advise_head(out_temp)
+    head = @wardrobe.select { |cloth| cloth.for_weather?(out_temp) && cloth.type == "Голова" }
+    head.sample
+  end
+
+  def advise_body(out_temp)
+    body = @wardrobe.select { |cloth| cloth.for_weather?(out_temp) && cloth.type == "Тело" }
+    body.sample
+  end
+
+  def advise_legs(out_temp)
+    legs = @wardrobe.select { |cloth| cloth.for_weather?(out_temp) && cloth.type == "Ноги" }
+    legs.sample
+  end
+
+  def advise_boots(out_temp)
+    boots = @wardrobe.select { |cloth| cloth.for_weather?(out_temp) && cloth.type == "Обувь" }
+    boots.sample
   end
 end
