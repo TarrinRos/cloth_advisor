@@ -13,6 +13,8 @@ class SmartWardrobe
     @types_hash.each { |key, value| puts value.sample }
   end
 
+  private
+
   # Собирает все вещи, подпадающие под введеную температуру
   def collect_for_weather(out_temp)
     @all_collected_clothes = @wardrobe.select { |cloth| cloth.for_weather?(out_temp) }
