@@ -16,26 +16,32 @@ puts 'Программа "Одевайтесь по погоде" v 1.0.3'
 
 puts '========================================'
 
-sleep 2
+sleep 0.5
 
 puts 'Какая температура сейчас на улице?'
 
-puts 'Например: -20 или 20'
+puts 'Например: -20 или 20 или введите "х" для выхода'
 
-out_temp = STDIN.gets.to_i
+out_temp = STDIN.gets.chomp.downcase
 
-case(out_temp)
-when(-40..40)
-  puts ''
+if out_temp != 'x'
+  out_temp = out_temp.to_i
 
-  puts 'В такую погоду я Вам советую надеть:'
+  case(out_temp)
+  when(-40..40)
+    puts ''
 
-  puts '===================================='
+    puts 'В такую погоду я Вам советую надеть:'
 
-  puts ''
+    puts '===================================='
 
-  smart_wardrobe.advise(out_temp)
+    puts ''
+
+    smart_wardrobe.advise(out_temp)
+  else
+    puts 'Куда собрались в такую погоду? Сидите дома!'
+  end
 else
-  puts 'Куда собрались в такую погоду? Сидите дома!'
+  puts 'До свидания.'
 end
 
