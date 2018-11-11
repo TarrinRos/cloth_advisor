@@ -1,5 +1,15 @@
 require_relative 'lib/cloth'
 require_relative 'lib/smart_wardrobe'
+require 'net/http'
+require 'uri'
+require_relative 'lib/forecast_parser'
+
+TOWNS = {'Москва': '37', 'Рига': '312', 'ГонКонг': '256', 'Женева': '374', 'Вашингтон': '384', 'Каир': '334'}
+
+puts 'Программа "Одевайтесь по погоде" v 2'
+puts '========================================'
+
+sleep 0.5
 
 current_path = File.dirname(__FILE__)
 
@@ -12,31 +22,31 @@ full_path = Dir.glob("#{current_path}/data/*.txt")
 
 smart_wardrobe = SmartWardrobe.new(full_path)
 
-puts 'Программа "Одевайтесь по погоде" v 1.0.3'
-puts '========================================'
+# Получает все названия городов, формирует из них массив, сортирует по алфавиту
+towns_list = TOWNS.keys.to_a.sort
 
-sleep 0.5
+puts
+puts 'Под погоду какого города Вы бы хотели подобрать одежду?'
+puts
 
-puts 'Какая температура сейчас на улице?'
-puts 'Например: -20 или 20 или введите "х" для выхода'
-
-out_temp = STDIN.gets.chomp.downcase
-
-if out_temp != 'x'
-  out_temp = out_temp.to_i
-
-  case(out_temp)
-  when(-40..40)
-    puts ''
-    puts 'В такую погоду я Вам советую надеть:'
-    puts '===================================='
-    puts ''
-
-    smart_wardrobe.advise(out_temp)
-  else
-    puts 'Куда собрались в такую погоду? Сидите дома!'
-  end
-else
-  puts 'До свидания.'
+# выводт список на экран с индексом
+towns_list.each_with_index do |town, index|
+  puts "#{index + 1}. #{town}"
 end
 
+user_choice = STDIN.gets.to_i
+
+selected_town = towns_list[user_choice - 1]
+
+forecast = ForecastParser.get_data_from_xml(selected_town)
+
+meteo_data = MeteoData.new(forecast.node)
+
+# Выводит строку с сформированными данными прогноза
+puts
+puts "В городе #{forecast.city_name} сейчас: #{meteo_data.min_temp} ℃"
+puts
+puts "Я бы посоветовал Вам надеть:"
+puts
+
+smart_wardrobe.advise(meteo_data.min_temp)
