@@ -2,7 +2,7 @@ require 'rspec'
 require 'cloth'
 
 describe Cloth do
-  let(:cloth) { Cloth.new("spec/fixtures/cloth_sample.txt") }
+  let(:cloth) { Cloth.new("spec/fixtures/cloth_sample_1.txt") }
 
   describe '#initialize' do
     it 'assings title, type and temperature from array' do
