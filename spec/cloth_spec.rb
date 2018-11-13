@@ -27,6 +27,8 @@ describe Cloth do
   end
 
   describe '#to_s' do
-
+    it 'returns string with parameters' do
+      expect(cloth.to_s).to eq "#{cloth.type}: #{cloth.title}, (#{cloth.temper[0]}..#{cloth.temper[1]})"
+    end
   end
 end
