@@ -1,6 +1,6 @@
 class SmartWardrobe
-  def initialize(full_path)
-    @wardrobe = full_path.map {|path| Cloth.new(path)}
+  def initialize(files_list)
+    @wardrobe = files_list.map {|path| Cloth.new(path)}
   end
 
   # Советует случайные вещи разных типов на основании введеной температуры
@@ -11,6 +11,10 @@ class SmartWardrobe
     collect_types
     collect_uniq_by_types
     @types_hash.each { |key, value| puts value.sample }
+  end
+
+  def to_a
+    @wardrobe
   end
 
   private

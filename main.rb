@@ -18,9 +18,9 @@ current_path = File.dirname(__FILE__)
 # Программа подбирает случайные вещи на основании введеной температуры
 # Выводит список вещей на экран
 
-full_path = Dir.glob("#{current_path}/data/*.txt")
+files_list = Dir.glob("#{current_path}/data/*.txt")
 
-smart_wardrobe = SmartWardrobe.new(full_path)
+smart_wardrobe = SmartWardrobe.new(files_list)
 
 # Получает все названия городов, формирует из них массив, сортирует по алфавиту
 towns_list = TOWNS.keys.to_a.sort
