@@ -10,7 +10,7 @@ class SmartWardrobe
     collect_for_weather(out_temp)
     collect_types
     collect_uniq_by_types
-    @types_hash.each { |key, value| puts value.sample }
+    @types_hash
   end
 
   def to_a

@@ -49,4 +49,6 @@ puts
 puts "Я бы посоветовал Вам надеть:"
 puts
 
-smart_wardrobe.advise(meteo_data.min_temp)
+advised_clothes = smart_wardrobe.advise(meteo_data.min_temp)
+
+advised_clothes.each { |type, cloth| puts cloth.sample }
