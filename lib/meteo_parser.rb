@@ -1,9 +1,15 @@
 require 'uri'
-require 'rexml/document'
+require 'net/http'
 require_relative 'meteo_data'
 
-class ForecastParser
+class MeteoParser
+  TOWNS = {'Москва': '37', 'Рига': '312', 'ГонКонг': '256', 'Женева': '374', 'Вашингтон': '384', 'Каир': '334'}
+
   attr_reader :node, :city_name
+
+  def self.get_towns_list
+    TOWNS.keys.sort
+  end
 
   def self.get_data_from_xml(choiced_town)
     # Формирует ссылку на XML файл исходя из выбранного города и отправляет запрос
@@ -17,12 +23,15 @@ class ForecastParser
     new(doc)
   end
 
-  def initialize(doc)
+  def initialize(selected_town)
+    @town_id = selected_town
+    response = Net::HTTP.get_response(URI("https://xml.meteoservice.ru/export/gismeteo/point/#{@town_id}.xml"))
+    response.body
     @node = to_a(doc)
     @city_name = get_city_name(doc)
   end
 
-  private
+    private
 
   # Передает каждый выбранный элемент в массив
   def to_a(doc)

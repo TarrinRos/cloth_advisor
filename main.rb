@@ -2,9 +2,7 @@ require_relative 'lib/cloth'
 require_relative 'lib/smart_wardrobe'
 require 'net/http'
 require 'uri'
-require_relative 'lib/forecast_parser'
-
-TOWNS = {'Москва': '37', 'Рига': '312', 'ГонКонг': '256', 'Женева': '374', 'Вашингтон': '384', 'Каир': '334'}
+require_relative 'lib/meteo_parser'
 
 puts 'Программа "Одевайтесь по погоде" v 2'
 puts '========================================'
@@ -23,7 +21,7 @@ files_list = Dir.glob("#{current_path}/data/*.txt")
 smart_wardrobe = SmartWardrobe.new(files_list)
 
 # Получает все названия городов, формирует из них массив, сортирует по алфавиту
-towns_list = TOWNS.keys.to_a.sort
+towns_list = MeteoParser.get_towns_list
 
 puts
 puts 'Под погоду какого города Вы бы хотели подобрать одежду?'
@@ -38,7 +36,7 @@ user_choice = STDIN.gets.to_i
 
 selected_town = towns_list[user_choice - 1]
 
-forecast = ForecastParser.get_data_from_xml(selected_town)
+forecast = MeteoParser.get_data_from_xml(selected_town)
 
 meteo_data = MeteoData.new(forecast.node)
 

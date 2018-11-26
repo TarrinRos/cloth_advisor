@@ -25,5 +25,4 @@ class MeteoData
   def get_min_temp(forecast)
     forecast.elements['TEMPERATURE'].attributes['min'].to_i
   end
-
 end
