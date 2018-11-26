@@ -1,8 +1,6 @@
 require_relative 'lib/cloth'
 require_relative 'lib/smart_wardrobe'
-require 'net/http'
-require 'uri'
-require_relative 'lib/meteo_parser'
+require_relative 'lib/meteo_service'
 
 puts 'Программа "Одевайтесь по погоде" v 2'
 puts '========================================'
@@ -21,13 +19,13 @@ files_list = Dir.glob("#{current_path}/data/*.txt")
 smart_wardrobe = SmartWardrobe.new(files_list)
 
 # Получает все названия городов, формирует из них массив, сортирует по алфавиту
-towns_list = MeteoParser.get_towns_list
+towns_list = MeteoService.get_towns_list
 
 puts
 puts 'Под погоду какого города Вы бы хотели подобрать одежду?'
 puts
 
-# выводт список на экран с индексом
+# выводит список на экран с индексом
 towns_list.each_with_index do |town, index|
   puts "#{index + 1}. #{town}"
 end
@@ -36,13 +34,13 @@ user_choice = STDIN.gets.to_i
 
 selected_town = towns_list[user_choice - 1]
 
-forecast = MeteoParser.get_data_from_xml(selected_town)
+xml_body = MeteoService.get_xml(selected_town)
 
-meteo_data = MeteoData.new(forecast.node)
+meteo_data = MeteoData.get_from_xml(xml_body)
 
 # Выводит строку с сформированными данными прогноза
 puts
-puts "В городе #{forecast.city_name} сейчас: #{meteo_data.min_temp} ℃"
+puts "В городе #{meteo_data.city_name} сейчас: #{meteo_data.min_temp} ℃"
 puts
 puts "Я бы посоветовал Вам надеть:"
 puts
