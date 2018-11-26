@@ -1,8 +1,6 @@
 require 'rexml/document'
 
 class MeteoData
-
-  # Возвращает дату в формате ДД.ММ.ГГГГ
   def self.get_from_xml(xml)
     doc = REXML::Document.new(xml)
 
